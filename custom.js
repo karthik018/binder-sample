@@ -3,9 +3,12 @@ Jupyter.toolbar.add_buttons_group([
          'label'   : 'Submit',
          'icon'    : 'fa-terminal',
          'callback': function(){
-         	user_name = prompt("Enter your user name to submit");
-         	console.log(user_name);
+         	$.ajax({
+				type: "POST",
+				url: "~/api/test.py",
+				data: { param: input },
+				success: console.log(response)
+			});
          }
     }
-    // add more button here if needed.
 ]);
