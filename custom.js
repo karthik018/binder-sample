@@ -15,7 +15,7 @@ Jupyter.toolbar.add_buttons_group([
 		      "out = f.getvalue().splitlines()[-1]\n" + "print(out)";
 		      
 			Jupyter.notebook.events.one("notebook_saved.Notebook", function() {
-		      Jupyter.notebook.kernel.execute(jvn_commit, function() {
+		      Jupyter.notebook.kernel.execute(run_submit, function() {
 		        console.log(jvnLog);
 		      });
 		    });
