@@ -7,12 +7,11 @@ Jupyter.toolbar.add_buttons_group([
          	var user_data = {
          		"name": name
          	}
-			require(['child_process'], function(cp) {
-				var spawn = cp.spawn;
-				const sensor = spawn('python', ['/api/test.py']);
-				sensor.stdout.on('data', function(data) {
-					console.log(data);
-				});
+			$.ajax({
+				url: "/api/test.py",
+				success: function(response){
+					console.log(response);
+				}
 			});
          }
     }
