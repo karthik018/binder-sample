@@ -4,19 +4,21 @@ Jupyter.toolbar.add_buttons_group([
          'icon'    : 'fa-terminal',
          'callback': function(){
          	var name = prompt("Enter user name to submit");
-         	var user_data = {
-         		"name": name
-         	}
-			$.ajax({
-				type: "POST",
-				contentType: 'application/json',
-            	dataType: 'json',
-				url: "/api/test.py",
-				data: JSON.stringify(user_data),
-				success: function(response){
-					console.log(response);
-				}
-			});
+         	const jvnLog = data => {
+		      resolve(data.content.text.trim());
+		    };
+         	const run_submit = "from api import test\n" + "import io\n" +
+		      "from contextlib import redirect_stdout\n" +
+		      "f = io.StringIO()\n" +
+		      "with redirect_stdout(f):\n" +
+		      "\t" + "test.test_method("name")\n" + 
+		      "out = f.getvalue().splitlines()[-1]\n" + "print(out)";
+		      
+			Jupyter.notebook.events.one("notebook_saved.Notebook", function() {
+		      Jupyter.notebook.kernel.execute(jvn_commit, function() {
+		        console.log(jvnLog);
+		      });
+		    });
          }
     }
 ]);
