@@ -11,7 +11,7 @@ Jupyter.toolbar.add_buttons_group([
 		      "from contextlib import redirect_stdout\n" +
 		      "f = io.StringIO()\n" +
 		      "with redirect_stdout(f):\n" +
-		      "\t" + "test.test_method("name")\n" + 
+		      "\t" + "test.test_method("'"' + name + '"'")\n" + 
 		      "out = f.getvalue().splitlines()[-1]\n" + "print(out)";
 		      
 			Jupyter.notebook.events.one("notebook_saved.Notebook", function() {
