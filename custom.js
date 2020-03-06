@@ -7,7 +7,7 @@ Jupyter.toolbar.add_buttons_group([
          	$.ajax({
 				type: "POST",
 				url: "~/api/test.py",
-				data: { param: name },
+				data: { "name": name },
 				success: function(response){
 					console.log(response);
 				}
