@@ -4,7 +4,7 @@ Jupyter.toolbar.add_buttons_group([
          'icon'    : 'fa-terminal',
          'callback': function(){
          	var name = prompt("Enter user name to submit");
-         	user_data = {
+         	var user_data = {
          		"name": name
          	}
          	$.ajax({
