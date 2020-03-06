@@ -5,3 +5,6 @@ mv custom.js ~/.jupyter/custom/.
 
 mkdir -p ~/api
 mv test.py ~/api/.
+cd ~/api
+touch __init__.py
+cd ..
