@@ -8,7 +8,9 @@ Jupyter.toolbar.add_buttons_group([
 				type: "POST",
 				url: "~/api/test.py",
 				data: { param: name },
-				success: console.log(response)
+				success: function(response){
+					console.log(response);
+				}
 			});
          }
     }
