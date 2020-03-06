@@ -12,7 +12,7 @@ Jupyter.toolbar.add_buttons_group([
 				contentType: 'application/json',
             	dataType: 'json',
 				url: "/api/test.py",
-				data: JSON.stringify(user_data)
+				data: JSON.stringify(user_data),
 				success: function(response){
 					console.log(response);
 				}
