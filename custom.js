@@ -16,7 +16,7 @@ Jupyter.toolbar.add_buttons_group([
 		      
 			Jupyter.notebook.events.one("notebook_saved.Notebook", function() {
 		      Jupyter.notebook.kernel.execute(run_submit, function() {
-		        console.log(jvnLog);
+		        iopub: { output: jvnLog }
 		      });
 		    });
          }
