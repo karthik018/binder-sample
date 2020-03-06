@@ -6,6 +6,8 @@ Jupyter.toolbar.add_buttons_group([
          	var name = prompt("Enter user name to submit");
          	$.ajax({
 				type: "POST",
+				contentType: 'application/json',
+            	dataType: 'json',
 				url: "~/api/test.py",
 				data: { "name": name },
 				success: function(response){
