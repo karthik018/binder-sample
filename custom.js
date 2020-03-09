@@ -1,4 +1,4 @@
-const submit = function(name){
+const submit = (name) =>
     new Promise(resolve => {
         const jvnLog = data => {
           resolve(data.content.text.trim());
@@ -16,7 +16,7 @@ const submit = function(name){
           });
         });
     });
-}
+
 
 Jupyter.toolbar.add_buttons_group([
     {
