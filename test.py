@@ -1,3 +1,5 @@
+import click
+
+
 def test_method(name):
-	print("Hello " + name)
-	
+	click.echo("Hello "+name)
