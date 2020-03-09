@@ -21,7 +21,7 @@ const submit = (name) =>
 Jupyter.toolbar.add_buttons_group([
     {
          'label'   : 'Submit',
-         'icon'    : 'icon-cloud-upload',
+         'icon'    : 'fa-cloud-upload fa',
          'callback': function(){
          	var name = prompt("Enter user name to submit");
          	submit(name).then(log_data => {
