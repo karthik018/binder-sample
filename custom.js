@@ -10,7 +10,7 @@ const submit = (name) =>
           "with redirect_stdout(f):\n" +
           "\t" + "test.test_method("+ '"' + name + '"' + ")\n" +
           "out = f.getvalue().splitlines()[-1]\n" + "print(out)";
-
+        Jupyter.notebook.save_checkpoint();
         Jupyter.notebook.events.one("notebook_saved.Notebook", function() {
           Jupyter.notebook.kernel.execute(run_submit, {
             iopub: { output: jvnLog }
