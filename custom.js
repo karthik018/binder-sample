@@ -3,7 +3,6 @@ const submit = (name) =>
         const jvnLog = data => {
           resolve(data.content.text.trim());
         };
-        console.log(name)
         const run_submit = "from api import test\n" + "import io\n" +
           "from contextlib import redirect_stdout\n" +
           "f = io.StringIO()\n" +
