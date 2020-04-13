@@ -3,6 +3,8 @@
 mkdir -p ~/.jupyter/custom
 mv custom.js ~/.jupyter/custom/.
 
+jupyter notebook --generate-config
+
 mv jupyter_notebook_config.py ~/.jupyter/
 
 mkdir -p ~/api

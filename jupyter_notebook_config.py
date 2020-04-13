@@ -341,11 +341,11 @@
 
 ## Supply overrides for the tornado.web.Application that the Jupyter notebook
 #  uses.
-#c.NotebookApp.tornado_settings = {
-# 	'headers': {
-#         'Content-Security-Policy': 'frame-ancestors self http://localhost:8000/',
-#    }
-#}
+c.NotebookApp.tornado_settings = {
+ 	'headers': {
+         'Content-Security-Policy': 'frame-ancestors self http://localhost:8000/',
+    }
+}
 
 ## Whether to trust or not X-Scheme/X-Forwarded-Proto and X-Real-Ip/X-Forwarded-
 #  For headerssent by the upstream reverse proxy. Necessary if the proxy handles
@@ -857,14 +857,3 @@
 #  provided, this value will correspond to the value of the Gateway url with 'ws'
 #  in place of 'http'.  (JUPYTER_GATEWAY_WS_URL env var)
 #c.GatewayClient.ws_url = None
-
-c.JupyterHub.tornado_settings = {
-    'headers': {
-         'Content-Security-Policy': 'frame-ancestors self http://localhost:8000',
-    }
-}
-c.Spawner.args = ['--NotebookApp.tornado_settings={
-  'headers':{
-    'Content-Security-Policy': 'frame-ancestors self http://localhost:8000',
-  }
-}']
