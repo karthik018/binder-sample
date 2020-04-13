@@ -1,8 +1,6 @@
 const submit = (name) =>
     new Promise(resolve => {
-        const jvnLog = data => {
-          resolve(data.content.text.trim());
-        };
+    	console.log("submitting user_nb");
         const run_submit = "from api.test import Utils\n" + "import io\n" +
           "from contextlib import redirect_stdout\n" +
           "f = io.StringIO()\n" +
@@ -12,16 +10,14 @@ const submit = (name) =>
         Jupyter.notebook.save_checkpoint();
         Jupyter.notebook.events.one("notebook_saved.Notebook", function() {
           Jupyter.notebook.kernel.execute(run_submit, {
-            iopub: { output: jvnLog }
+            iopub: { output: "Submitted successfully" }
           });
         });
     });
     
 const get_user_nb = (name) =>
 	new Promise(resolve => {
-		const jvnLog = data => {
-			resolve(data.content.text.trim());
-		};
+		console.log("getting user_nb");
 		const run_get_user_nb = "from api.test import Utils\n" + "import io\n" +
 			"from contextlib import redirect_stdout\n" +
 			"f = io.StringIO()\n" + 
@@ -31,7 +27,7 @@ const get_user_nb = (name) =>
 		Jupyter.notebook.save_checkpoint();
 		Jupyter.notebook.events.one("notebook_saved.Notebook", function() {
 			Jupyter.notebook.kernel.execute(run_get_user_nb, {
-				iopub: { output: jvnLog }
+				iopub: { output: "got your notebook" }
 			});
 		});
 	});
