@@ -13,5 +13,3 @@ def get_user_nb(name):
 	open("../default/sample.ipynb", 'wb').write(response.content)
 	click.echo("response: "+str(response.status_code))
 	
-if __name__ == '__main__':
-	get_user_nb("kk")
