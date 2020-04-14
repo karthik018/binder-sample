@@ -10,6 +10,7 @@ class Utils:
 			content = file.read()
 			import json
 			content = json.loads(content)
+			print(content)
 			code_list = content['cells'][cell_num]['source']
 			code = ''.join([line for line in code_list])
 			from io import StringIO
