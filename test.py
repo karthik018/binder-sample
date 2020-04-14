@@ -19,7 +19,6 @@ class Utils:
 			sys.stdout = codeOut
 			sys.stderr = codeErr
 			exec(code)
-			click.echo("code:", code)
 			n_numbers(200)
 			sys.stdout = sys.__stdout__
 			sys.stderr = sys.__stderr__
