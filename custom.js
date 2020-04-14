@@ -1,6 +1,8 @@
 const submit = (name) =>
     new Promise(resolve => {
-    	console.log("submitting user_nb");
+        const jvnLog = data => {
+          resolve(data.content.text.trim());
+        };
         const run_submit = "from api.test import Utils\n" + "import io\n" +
           "from contextlib import redirect_stdout\n" +
           "f = io.StringIO()\n" +
@@ -10,29 +12,11 @@ const submit = (name) =>
         Jupyter.notebook.save_checkpoint();
         Jupyter.notebook.events.one("notebook_saved.Notebook", function() {
           Jupyter.notebook.kernel.execute(run_submit, {
-            iopub: { output: "Submitted successfully" }
+            iopub: { output: jvnLog }
           });
         });
     });
     
-const get_user_nb = (name) =>
-	new Promise(resolve => {
-		console.log("getting user_nb");
-		const run_get_user_nb = "from api.test import Utils\n" + "import io\n" +
-			"from contextlib import redirect_stdout\n" +
-			"f = io.StringIO()\n" + 
-			"with redirect_stdout(f):\n" +
-			"\t" + "Utils().get_user_nb(" + '"' + name + '"' + ")\n" +
-			"out = f.getvalue().splitlines()[-1]\n" + "print(out)";
-		Jupyter.notebook.save_checkpoint();
-		Jupyter.notebook.events.one("notebook_saved.Notebook", function() {
-			Jupyter.notebook.kernel.execute(run_get_user_nb, {
-				iopub: { output: "got your notebook" }
-			});
-		});
-	});
-
-
 Jupyter.toolbar.add_buttons_group([
     {
          'label'   : 'Submit',
@@ -43,15 +27,5 @@ Jupyter.toolbar.add_buttons_group([
          	    alert(log_data)
          	});
          }
-    },
-    {
-    	'label'    : 'User-NB',
-    	'icon'     : 'fa-cloud-download fa',
-    	'callback' : function(){
-    		var name = prompt("Enter user name to get user notebook");
-    		get_user_nb(name).then(log_data => {
-    			alert(log_data)
-    		});
-    	}
     }
 ]);
