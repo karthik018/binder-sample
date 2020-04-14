@@ -7,7 +7,7 @@ class Utils:
 	def test_method(self, name):
 		cell_num = 1
 		with open("./sample.ipynb", "r") as file:
-			file_content = file.read()
+			content = file.read()
 			import json
 			content = json.loads(content)
 			code_list = content['cells'][cell_num]['source']
