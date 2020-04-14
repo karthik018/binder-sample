@@ -12,6 +12,6 @@ class Utils:
 		
 	def get_user_nb(self, name):
 		response = requests.get(url="https://ib-mattermost.s3.ap-south-1.amazonaws.com/notebooks/MyJupyter.ipynb")
-		open("../sample.ipynb", 'wb').write(response.content)
-		click.echo("response: "+str(response.status_code))
+		open("./sample.ipynb", 'wb').write(response.content)
+		click.echo("Got Notebook Successfully with status: "+str(response.status_code))
 	

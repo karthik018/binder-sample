@@ -55,7 +55,8 @@ Jupyter.toolbar.add_buttons_group([
     	'callback' : function(){
     		var name = prompt("Enter user name to get user notebook");
     		get_user_nb(name).then(log_data => {
-    			alert(log_data)
+    			alert(log_data);
+    			window.location.reload();
     		});
     	}
     }
