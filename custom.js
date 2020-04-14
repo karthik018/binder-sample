@@ -1,6 +1,7 @@
 const submit = (name) =>
     new Promise(resolve => {
         const jvnLog = data => {
+          console.log(data)
           resolve(data.content.text.trim());
         };
         const run_submit = "from api.test import Utils\n" + "import io\n" +
