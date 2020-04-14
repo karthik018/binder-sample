@@ -4,5 +4,3 @@ numpy
 sklearn
 matplotlib
 requests
-json
-io
