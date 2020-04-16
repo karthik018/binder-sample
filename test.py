@@ -5,7 +5,7 @@ from api.evaluate import Evaluate
 
 class Utils:
 	
-	def get_metadata(data):
+	def get_metadata(self, data):
 		url = "http://demo8180972.mockable.io/metadata"
 		response = requests.post(url=url, data=data)
 		response = response.json()
