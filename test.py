@@ -1,6 +1,7 @@
 import click
 import requests
 from api.evaluate import Evaluate
+import json
 
 
 class Utils:
@@ -14,6 +15,10 @@ class Utils:
 	
 	def test_method(self, name):
 		metadata = self.get_metadata(name)
+		
+		with open("./sample.ipynb", "r") as file:
+			content = file.read()
+			content = json.loads(content)
 		
 		metrics = Evaluate().get_evaluation_metrics()
 		response = requests.post(url="http://demo7636223.mockable.io/submit", data=metrics)
