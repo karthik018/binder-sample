@@ -9,6 +9,7 @@ class Utils:
 		url = "http://demo8180972.mockable.io/metadata"
 		response = requests.post(url=url, data=data)
 		response = response.json()
+		
 		return response["metadata"]
 	
 	def test_method(self, name):
