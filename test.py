@@ -1,6 +1,6 @@
 import click
 import requests
-from evaluate import Evaluate
+from api.evaluate import Evaluate
 
 
 class Utils:
