@@ -9,6 +9,5 @@ mv jupyter_notebook_config.py ~/.jupyter/
 
 mkdir -p ~/api
 mv test.py ~/api/.
-cd ~/api
-touch __init__.py
-cd ..
+mv evaluate.py ~/api/.
+touch ~/api/__init__.py
