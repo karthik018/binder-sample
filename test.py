@@ -26,7 +26,7 @@ class Utils:
 		#	content = json.loads(content)
 		
 		metrics = evaluate.evaluate_zipfile_with_test_code("./sample.ipynb", metric, cell_content)
-		open("output.txt", "w").write(metrics)
+		open("output.txt", "w").write(json.dumps(metrics))
 		
 		response = requests.post(url="http://demo7636223.mockable.io/submit", data=metrics)
 		response = response.json()
