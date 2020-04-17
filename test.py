@@ -12,6 +12,7 @@ class Utils:
 		response = response.json()
 		
 		metadata = response["metadata"]
+		print(metadata)
 		metadata = json.loads(metadata)
 		
 		return metadata
