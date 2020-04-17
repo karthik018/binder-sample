@@ -106,6 +106,7 @@ def evaluate_zipfile_with_test_code(user_submission_folder_path, evaluation_metr
 		metric_display_str = evaluation_metric_display_strs_dict[evaluation_metric]
 		output_dict[metric_display_str] = metric_value
 	except Exception as e:
+		print(e)
 		error_code, error_msg = e.args
 		output_dict[error_msg_field_name] = error_msg
 	return output_dict
