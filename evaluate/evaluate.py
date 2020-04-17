@@ -15,7 +15,7 @@ predicted_test_Y_file_name = "predicted_test_Y.csv"
 error_msg_field_name = "Evaluation failed"
 error_code_field_name = "error_code"
 test_x_file_path = "test_X.csv"
-actual_test_Y_file_path = "actual_test_Y.csv"
+actual_test_y_file_path = "actual_test_Y.csv"
 
 
 evaluation_metric_display_strs_dict = {EvaluationMetricType.MSE.value: "MSE", EvaluationMetricType.ACCURACY.value: "Accuracy",EvaluationMetricType.F1_SCORE.value: "F1 score",EvaluationMetricType.PRECISION.value: "Precision",EvaluationMetricType.RECALL.value: "Recall",EvaluationMetricType.ADJUSTED_MUTUTAL_INFO.value: "Adjusted Mutual Info" }
