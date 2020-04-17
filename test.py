@@ -7,12 +7,11 @@ import json
 class Utils:
 	
 	def get_metadata(self, data):
-		url = "http://demo8180972.mockable.io/metadata"
+		url = "http://demo7636223.mockable.io/metadata"
 		response = requests.post(url=url, data=data)
 		response = response.json()
 		
 		metadata = response["metadata"]
-		print(metadata)
 		metadata = json.loads(metadata)
 		
 		return metadata
