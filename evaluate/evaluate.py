@@ -11,11 +11,14 @@ class EvaluationMetricType(Enum):
 #CONSTANTS
 zip_file_name = "SubmissionCode.zip"
 code_file_name = "SubmissionCode.py"
+generate_output_csv = "./api/evaluate/output_Y.csv"
+predicted_output_Y_file_path = "./api/evaluate/predicted_output_Y.csv"
+predicted_output_Y_file_name = "./predicted_output_Y.csv"
 predicted_test_Y_file_name = "predicted_test_Y.csv"
 error_msg_field_name = "Evaluation failed"
 error_code_field_name = "error_code"
-test_x_file_path = "test_X.csv"
-actual_test_y_file_path = "actual_test_Y.csv"
+test_x_file_path = "~/api/evaluate/test_X.csv"
+actual_test_y_file_path = "./api/evaluate/actual_test_Y.csv"
 
 
 evaluation_metric_display_strs_dict = {EvaluationMetricType.MSE.value: "MSE", EvaluationMetricType.ACCURACY.value: "Accuracy",EvaluationMetricType.F1_SCORE.value: "F1 score",EvaluationMetricType.PRECISION.value: "Precision",EvaluationMetricType.RECALL.value: "Recall",EvaluationMetricType.ADJUSTED_MUTUTAL_INFO.value: "Adjusted Mutual Info" }
@@ -43,7 +46,17 @@ def run_code(user_notebook_file_path, m_test_X_file_path, cell_content):
 			code += code_call
 			open(code_file_name, "w").write(code)
 			in_file.close()
-		os.system("python3 " + code_file_name + " " + m_test_X_file_path + " > " + predicted_test_Y_file_name)
+		os.system("python3 " + code_file_name + " " + m_test_X_file_path + " > " + generate_output_csv)
+		with open(generate_output_csv, 'r') as in_file:
+			data = in_file.read()
+			import json
+			data = json.loads(data)
+			import csv
+			with open(predicted_output_Y_file_path, 'w', newline='') as csvfile:
+				wr = csv.writer(csvfile)
+				wr.writerows(data)
+				csvfile.close()
+			in_file.close()
 	except e:
 		raise Exception("CODE_ERROR", e+" - error" )
 		
@@ -53,21 +66,23 @@ def get_pred_and_actual_y_arrays(m_predicted_Y_file_path, m_actual_Y_file_path):
 		import numpy as np
 		with open(m_predicted_Y_file_path,newline='') as csvfile:
 			y_pred = np.array(list(csv.reader(csvfile)))
-		with open(m_actual_Y_file_path,newline='') as csvfile:
+		with open(m_actual_Y_file_path,newline='') as csvfile:   
 			y_true = np.array(list(csv.reader(csvfile)))
-	except:
+	except Exception as e:
+		print(e)        
 		raise Exception("WRONG_PREDICTED_Y_FILE","Couldn't generate the output file named '" + predicted_test_Y_file_name+"'")
 	try:
 		y_true = y_true.astype(np.float64)
 		y_pred = y_pred.astype(np.float64)
 		return y_true, y_pred
-	except:
+	except Exception as e:
 		raise Exception("WRONG_PREDICTED_Y_VALUES","Encountered unexpected data in output file")
 	
 	
 
 
 def get_evaluation_metric_value(m_predicted_Y_file_path, m_actual_Y_file_path, m_evaluation_metric):
+	print(m_predicted_Y_file_path, m_actual_Y_file_path)
 	y_true, y_pred = get_pred_and_actual_y_arrays(m_predicted_Y_file_path, m_actual_Y_file_path)
 	try:
 		metric_value = 0
@@ -102,7 +117,7 @@ def evaluate_zipfile_with_test_code(user_submission_folder_path, evaluation_metr
 	output_dict = {}
 	try:
 		run_code(user_submission_folder_path, test_x_file_path, cell_content)
-		metric_value = get_evaluation_metric_value(user_submission_folder_path+predicted_test_Y_file_name,actual_test_y_file_path , evaluation_metric)
+		metric_value = get_evaluation_metric_value(predicted_output_Y_file_path,actual_test_y_file_path , evaluation_metric)
 		metric_display_str = evaluation_metric_display_strs_dict[evaluation_metric]
 		output_dict[metric_display_str] = metric_value
 	except Exception as e:
@@ -115,3 +130,4 @@ def evaluate_zipfile_with_test_code(user_submission_folder_path, evaluation_metr
 #TESTING 
 #output = evaluate_zipfile_with_test_code("C:/Users/GameDev2/Desktop/ProjectEvaluation/UserSubFolder/", "C:/Users/GameDev2/Desktop/ProjectEvaluation/EvalFolder/test_X.csv", "C:/Users/GameDev2/Desktop/ProjectEvaluation/EvalFolder/actual_test_Y.csv", EvaluationMetricType.MSE.value)
 #print(output)
+
