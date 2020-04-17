@@ -1,6 +1,6 @@
 import click
 import requests
-from api.evaluate import Evaluate
+from api.evaluate import evaluate
 import json
 
 
@@ -11,16 +11,23 @@ class Utils:
 		response = requests.post(url=url, data=data)
 		response = response.json()
 		
-		return response["metadata"]
+		metadata = response["metadata"]
+		metadata = json.loads(metadata)
+		
+		return metadata
 	
 	def test_method(self, name):
 		metadata = self.get_metadata(name)
+		cell_content = metadata["pick_cell"]
+		metric = metadata["metric"]
 		
-		with open("./sample.ipynb", "r") as file:
-			content = file.read()
-			content = json.loads(content)
+		# with open("./sample.ipynb", "r") as file:
+		#	content = file.read()
+		#	content = json.loads(content)
 		
-		metrics = Evaluate().get_evaluation_metrics()
+		metrics = evaluate.evaluate_zipfile_with_test_code("./sample.ipynb", metric, cell_content)
+		open("output.txt", "w").write(metrics)
+		
 		response = requests.post(url="http://demo7636223.mockable.io/submit", data=metrics)
 		response = response.json()
 		click.echo("response: "+response["msg"])
