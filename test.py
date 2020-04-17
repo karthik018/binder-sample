@@ -29,8 +29,7 @@ class Utils:
 		open("output.txt", "w").write(json.dumps(metrics))
 		
 		response = requests.post(url="http://demo7636223.mockable.io/submit", data=metrics)
-		response = response.json()
-		click.echo("response: "+response["msg"])
+		click.echo("Your code metrics: "+ json.dumps(metrics))
 		
 		
 	def get_user_nb(self, name):
