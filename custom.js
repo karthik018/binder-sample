@@ -37,6 +37,22 @@ const get_user_nb = (name) =>
 			});
 		});
 	});
+	
+const test_nb = () =>
+	new Promise(resolve => {
+		const jvnLog = data => {
+			console.log(data);
+			resolve(data.content.text.trim());
+		}
+		const test_user_nb = "with open('./api/assertion.py', 'r') as file:\n" + 					"\t" + "code = file.read()\n" + 
+				"\t" + "exec(code)\n"
+		Jupyter.notebook.save_checkpoint();
+		Jupyter.notebook.events.one("notebook_saved.Notebook", function() {
+			Jupyter.notebook.kernel.execute(test_user_nb, {
+				iopub: { output: jvnLog }
+			});
+		});
+	});
     
 Jupyter.toolbar.add_buttons_group([
     {
@@ -55,6 +71,17 @@ Jupyter.toolbar.add_buttons_group([
     	'callback' : function(){
     		var name = prompt("Enter user name to get user notebook");
     		get_user_nb(name).then(log_data => {
+    			alert(log_data);
+    			window.location.reload();
+    		});
+    	}
+    },
+    {
+    	'label'    : 'Test',
+    	'icon'     : '',
+    	'callback' : function(){
+    		var name = prompt("Enter user name to get user notebook");
+    		test_nb().then(log_data => {
     			alert(log_data);
     			window.location.reload();
     		});
