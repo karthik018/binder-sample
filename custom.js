@@ -45,7 +45,10 @@ const test_nb = () =>
 			resolve(data.content.text.trim());
 		}
 		const test_user_nb = "with open('./api/assertion.py', 'r') as file:\n" + 					"\t" + "code = file.read()\n" + 
-				"\t" + "exec(code)\n"
+				"\t" + "try:\n" +
+				"\t" + "\texec(code)\n"
+				"\t" + "except AssertionError as e:\n" +
+				"\t" + "\tprint(e)\n"
 		Jupyter.notebook.save_checkpoint();
 		Jupyter.notebook.events.one("notebook_saved.Notebook", function() {
 			Jupyter.notebook.kernel.execute(test_user_nb, {
