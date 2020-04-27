@@ -1,3 +1,5 @@
+FROM scratch
+
 RUN pip install --no-cache-dir notebook==5.*
 
 ARG NB_USER=jovyan
