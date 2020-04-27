@@ -6,6 +6,7 @@ ENV USER ${NB_USER}
 ENV NB_UID ${NB_UID}
 ENV HOME /home/${NB_USER}
 
+USER root
 RUN adduser --disabled-password \
 	--gecos "Default user" \
 	--uid ${NB_UID} \
@@ -24,6 +25,5 @@ RUN mv test.py ${HOME}/api/.
 RUN mv evaluate/ ${HOME}/api/.
 RUN mv assertion.py ${HOME}/api/.
 
-USER root
 RUN chown -R ${NB_UID} ${HOME}
 USER ${NB_USER}
