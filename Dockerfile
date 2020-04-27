@@ -1,4 +1,4 @@
-FROM scratch
+FROM ubuntu:18.04
 
 RUN pip install --no-cache-dir notebook==5.*
 
@@ -12,7 +12,6 @@ RUN adduser --disabled-password \
 	--gecos "Default user" \
 	--uid ${NB_UID} \
 	${NB_USER}
-	
 
 RUN mkdir -p ${HOME}/.jupyter/custom
 RUN mv custom.js ${HOME}/.jupyter/custom/.
