@@ -21,7 +21,7 @@ RUN jupyter notebook --generate-config
 RUN mv jupyter_notebook_config.py ${HOME}/.jupyter/
 
 RUN mkdir -p ${HOME}/api
-touch ${HOME}/api/__init__.py
+RUN touch ${HOME}/api/__init__.py
 
 RUN mv test.py ${HOME}/api/.
 RUN mv evaluate/ ${HOME}/api/.
