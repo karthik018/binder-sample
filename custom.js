@@ -47,6 +47,7 @@ const test_nb = () =>
 		const test_user_nb = "with open('./api/assertion.py', 'r') as file:\n" + 					"\t" + "code = file.read()\n" + 
 				"\t" + "try:\n" +
 				"\t" + "\t" + "exec(code)\n" +
+				"\t" + "\t" + "print('Tests Passed')\n" +
 				"\t" + "except AssertionError as e:\n" +
 				"\t" + "\t" + "print(e)\n"
 		Jupyter.notebook.save_checkpoint();
