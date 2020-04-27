@@ -1,6 +1,6 @@
 FROM jupyter/scipy-notebook:bca04790b492
 
-ARG NB_USER=jovyan
+ARG NB_USER=jovyan_test
 ARG NB_UID=1000
 ENV USER ${NB_USER}
 ENV NB_UID ${NB_UID}
