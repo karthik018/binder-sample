@@ -1,6 +1,4 @@
-FROM ubuntu:18.04
-
-RUN pip install --no-cache-dir notebook==5.*
+FROM jupyter/scipy-notebook:bb81ab5ccff3
 
 ARG NB_USER=jovyan
 ARG NB_UID=1000
